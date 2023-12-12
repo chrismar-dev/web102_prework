@@ -164,7 +164,7 @@ let notMet = GAMES_JSON.filter(checkFunds);
 console.log(notMet.length);
 
 // create a string that explains the number of unfunded games using the ternary operator
-const displayStr = "";
+let displayStr = "";
 notMet.length < 40 ? displayStr = `A total of $${pledged.toLocaleString()} has been raised for 11 games. Currently, 7 games remain unfunded. We need your help to fund these amazing games!`: console.log(notMet);
 
 // create a new DOM element containing the template string and append it to the description container
@@ -176,8 +176,6 @@ templateString.innerHTML = `<p> A total of $${pledged.toLocaleString()} has been
  * Skills used: spread operator, destructuring, template literals, sort 
  */
 
-const firstGameContainer = document.getElementById("first-game");
-const secondGameContainer = document.getElementById("second-game");
 
 const sortedGames =  GAMES_JSON.sort( (item1, item2) => {
     return item2.pledged - item1.pledged;
@@ -188,3 +186,23 @@ const sortedGames =  GAMES_JSON.sort( (item1, item2) => {
 // create a new element to hold the name of the top pledge game, then append it to the correct element
 
 // do the same for the runner up item
+
+// Use destructuring and the spread operator to grab the first and second games
+// Use destructuring and the spread operator to grab the first and second games
+document.addEventListener("DOMContentLoaded", function () {
+    const [mostFundedGame, secondMostFundedGame, ...rest] = sortedGames;
+
+    const topFundedGameElement = document.createElement("div");
+    topFundedGameElement.innerHTML = `${mostFundedGame.name}`;
+
+    const firstGameContainer = document.getElementById("first-game");
+    firstGameContainer.appendChild(topFundedGameElement);
+
+    const secondFundedGameElement = document.createElement("div");
+    secondFundedGameElement.innerHTML = `${secondMostFundedGame.name}`;
+
+    const secondGameContainer = document.getElementById("second-game");
+    secondGameContainer.appendChild(secondFundedGameElement);
+});
+
+
